@@ -6,8 +6,12 @@ class ArticlesController < ApplicationController
 
     def create
         @article = Article.new(article_params)
-        @article.user_id = current_user
-        @article.save
+        @article.user_id = current_user.email
+        if @article.save
+            redirect_to root_path
+        else
+            render 'new'
+        end
     end
 
     def index

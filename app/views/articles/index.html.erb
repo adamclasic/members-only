@@ -1,15 +1,16 @@
-<h1>articles below</h1> <%= link_to 'Log in ', new_user_session_path %> </br>
+<h1>articles below</h1>
+<%= link_to 'Log in ', new_user_session_path %> </br>
+<%= link_to 'Log out ', destroy_user_session_path(current_user), method: :delete %> </br>
 <%= link_to 'write an article! ', new_article_path %>
 
 <ul>
 <% @articles.each do |a| %>
  <li><%= a.title %></li> 
  <li><%= a.body %></li> 
- <li><% if user_signed_in? %></li> 
- <li><%= a.user_id %></li> 
- <li><% else %></li> 
- <li><%= link_to 'Log in ', new_user_session_path %>to see the author </li> 
+ <% if user_signed_in? %>
+ <li>++<%= a.user_id %></li> 
+ <% else %>
+ <li>--<%=  link_to 'Log in ', new_user_session_path %>to see the author </li> 
     <% end %>
-
 <% end %>
 </ul>
