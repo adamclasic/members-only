@@ -1,0 +1,21 @@
+<h1>articles list:</h1>
+ <% if user_signed_in? %>
+<%= link_to 'Log out ', destroy_user_session_path, method: :delete %> </br>
+ <% else %>
+ <%= link_to 'Log in ', new_user_session_path %> </br>
+<% end %>
+
+
+<%= link_to 'write an article! ', new_article_path %>
+
+<ul>
+<% @articles.each do |a| %>
+ <li><%= a.title %></li> 
+ <li><%= a.body %></li> 
+ <% if user_signed_in? %>
+ <li><%= a.user.email %></li> 
+ <% else %>
+ <li><%=  link_to 'Log in ', new_user_session_path %>to see the author </li> 
+<% end %>
+<% end %>
+</ul>
